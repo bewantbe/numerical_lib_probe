@@ -1,0 +1,35 @@
+/*
+Usage:
+ sudo stap prob.stap
+ Then run the computation (Matlab/Mathematica)
+
+Ref:
+  System-wide monitoring of calls to a library function - stackexchange
+  https://unix.stackexchange.com/questions/419990/system-wide-monitoring-of-calls-to-a-library-function?rq=1
+
+  SystemTap Beginners Guide
+  https://sourceware.org/systemtap/SystemTap_Beginners_Guide/
+
+  SystemTap Tapset Reference Manual
+  https://sourceware.org/systemtap/tapsets/
+*/
+
+global start
+
+function timestamp:long() { return gettimeofday_us() - start }
+
+probe begin {
+  start = gettimeofday_us()
+  printf("ok\n")
+}
+
+/* mkl_lapack_dgerdb */
+probe process("/usr/local/MATLAB/R2017b/bin/glnxa64/mkl.so").function("mkl_lapack_dgerdb") {
+  printf("%s[%d]", execname(), pid())
+  print_usyms(ubacktrace())
+  printf("Called at t = %d us. \n", timestamp())
+}
+
+probe process("/usr/local/MATLAB/R2017b/bin/glnxa64/mkl.so").function("mkl_lapack_dgerdb").return {
+  printf("Call return at t = %d us. \n", timestamp())
+}
