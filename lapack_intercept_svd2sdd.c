@@ -107,3 +107,10 @@ LAPACK_INTERCEPT(mkl_lapack_dgeqrf, "mkl_lapack_dgeqrf",
   INT *M, INT *N, double *A, INT *LDA, double *TAU,
   double *WORK, INT *LWORK, INT INFO)
 
+/* To crash Matlab/Mathematica, so as to confirm dgerdb is called.
+LAPACK_INTERCEPT(mkl_lapack_dgerdb, "mkl_lapack_dgerdb",
+  call(jobz, n, kd, a, lda, d, e, tau, z, ldz, work, lwork, info),
+  char *jobz, INT *n, INT *kd, double *a, INT *lda,
+  double *d, double *e, double *tau, double *z, INT *ldz,
+  double *work, INT *lwork, INT *info)
+*/

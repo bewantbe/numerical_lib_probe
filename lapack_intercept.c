@@ -114,7 +114,7 @@ LAPACK_INTERCEPT(mkl_lapack_dgeqrf, "mkl_lapack_dgeqrf",
   double *WORK, INT *LWORK, INT INFO)
 
 /* guessed by `dsyrdb` in MKL - wrong */
-/*
+/* To crash Matlab/Mathematica, so as to confirm dgerdb is called.
 LAPACK_INTERCEPT(mkl_lapack_dgerdb, "mkl_lapack_dgerdb",
   call(jobz, n, kd, a, lda, d, e, tau, z, ldz, work, lwork, info),
   char *jobz, INT *n, INT *kd, double *a, INT *lda,
@@ -122,7 +122,7 @@ LAPACK_INTERCEPT(mkl_lapack_dgerdb, "mkl_lapack_dgerdb",
   double *work, INT *lwork, INT *info)
 */
 
-/*
+/* also wrong
 LAPACK_INTERCEPT(mkl_lapack_dgerdb, "mkl_lapack_dgerdb",
   call(M, N, A, LDA, D, E, TAUQ, TAUP, WORK, LWORK, INFO),
   INT *M, INT *N, double *A, INT *LDA,

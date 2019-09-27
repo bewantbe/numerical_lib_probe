@@ -19,6 +19,29 @@ double tofday(const struct timeval *tv0, const struct timeval *tv1)
       - (tv0->tv_sec + 1e-6 * tv0->tv_usec);
 }
 
+#define buflen 256
+char buf[buflen] = "";
+
+int print_mkl_ver()
+{
+/* For MKL v10.3
+  void mkl_serv_getversionstring_c (char* buf, int len);
+  mkl_serv_getversionstring_c(buf, buflen-1);
+*/
+/* For MKL v11.3.2, v2017.0.1, v2018.0.3 (e.g Mathematica)
+  void mkl_get_version_string (char* buf, int len);
+  mkl_get_version_string(buf, buflen-1);
+*/
+/* For MKL v2018.0.1 (e.g Matlab), need init MKL first.
+  void mkl_serv_get_version_string (char* buf, int len);
+  mkl_serv_get_version_string(buf, buflen-1);
+*/
+  void mkl_serv_get_version_string (char* buf, int len);
+  mkl_serv_get_version_string(buf, buflen-1);
+  printf("%s\n", buf);
+  return 0;
+}
+
 /* Matlab integer type */
 #define INT ptrdiff_t
 
@@ -32,6 +55,7 @@ int dgesdd_(
   double *S, double *U, INT *LDU, double *VT, INT *LDVT,
   double *WORK, INT *LWORK, INT *IWORK, INT *INFO)
 {
+  print_mkl_ver();
   printf("call dgesdd ... hand over to dgesvd\n");
   
   struct timeval tv0, tv1;
@@ -103,3 +127,10 @@ LAPACK_INTERCEPT(mkl_lapack_dgeqrf, "mkl_lapack_dgeqrf",
   INT *M, INT *N, double *A, INT *LDA, double *TAU,
   double *WORK, INT *LWORK, INT INFO)
 
+/* To crash Matlab/Mathematica, so as to confirm dgerdb is called.
+LAPACK_INTERCEPT(mkl_lapack_dgerdb, "mkl_lapack_dgerdb",
+  call(jobz, n, kd, a, lda, d, e, tau, z, ldz, work, lwork, info),
+  char *jobz, INT *n, INT *kd, double *a, INT *lda,
+  double *d, double *e, double *tau, double *z, INT *ldz,
+  double *work, INT *lwork, INT *info)
+*/

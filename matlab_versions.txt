@@ -84,6 +84,29 @@ Linear Algebra PACKage Version 3.7.0
 crash
 
 
+Mathematica 8.0 for Linux x86 (64-bit) (February 23, 2011)
+Intel(R) Math Kernel Library Version 10.3.0 Product Build 20100927 for Intel(R) 64 architecture applications
+
+
+mathematica/10
+
+
+mathematica/11.0.1 for Linux x86 (64-bit) (September 21, 2016)
+11.3.2
+
+mathematica/11.3.0 for Linux x86 (64-bit) (March 7, 2018)
+Intel(R) Math Kernel Library Version 2017.0.1 Product Build 20161005 for Intel(R) 64 architecture applications
+
+mathematica/12.0.0 for Linux x86 (64-bit) (April 7, 2019)
+/share/apps/mathematica/12.0.0/bin/MathKernel
+Intel(R) Math Kernel Library Version 2018.0.3 Product Build 20180406 for Intel(R) 64 architecture applications
+
+
+
+LD_PRELOAD=$PWD/lapack_intercept.so MKL_NUM_THREADS=4 
+LD_PRELOAD=$PWD/lapack_intercept_sdd2svd.so MKL_NUM_THREADS=4 
+
+
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Matlab
 
@@ -141,5 +164,18 @@ Mathematica	SVD routine
 10.3.0: n=2501	dgesdd = ?      + dbdsdc{dlasdq{dbdsqr}}
 
 
+---------
+LAPACK_INTERCEPT(mkl_lapack_dgerdb, "mkl_lapack_dgerdb",
+  call(jobz, n, kd, a, lda, d, e, tau, z, ldz, work, lwork, info),
+  char *jobz, INT *n, INT *kd, double *a, INT *lda,
+  double *d, double *e, double *tau, double *z, INT *ldz,
+  double *work, INT *lwork, INT *info)
+  
+Intel MKL ERROR: Parameter 12 was incorrect on entry to DGBBRDM.
+
+Intel MKL ERROR: Parameter 12 was incorrect on entry to DGBBRD.
+done mkl_lapack_dgerdb (t = 0.000 sec)
+
+Intel MKL ERROR: Parameter 16 was incorrect on entry to DGBBRDM.
 
 
