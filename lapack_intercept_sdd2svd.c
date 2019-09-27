@@ -55,7 +55,7 @@ int dgesdd_(
   double *S, double *U, INT *LDU, double *VT, INT *LDVT,
   double *WORK, INT *LWORK, INT *IWORK, INT *INFO)
 {
-  print_mkl_ver();
+  //print_mkl_ver();
   printf("call dgesdd ... hand over to dgesvd\n");
   
   struct timeval tv0, tv1;
