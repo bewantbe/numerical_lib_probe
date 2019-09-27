@@ -1,9 +1,9 @@
 /*
 Compile:
-$ gcc -shared -fPIC lapack_intercept_svd2sdd.c -o lapack_intercept_svd2sdd.so -ldl
+$ gcc -shared -fPIC lapack_intercept_sdd2svd.c -o lapack_intercept_sdd2svd.so -ldl
 
 Run:
-# LD_PRELOAD=$PWD/lapack_intercept_svd2sdd.so matlab17 -nojvm
+# LD_PRELOAD=$PWD/lapack_intercept_sdd2svd.so matlab17 -nojvm
 */
 
 #define _GNU_SOURCE
@@ -22,28 +22,24 @@ double tofday(const struct timeval *tv0, const struct timeval *tv1)
 /* Matlab integer type */
 #define INT ptrdiff_t
 
+int dgesvd_(
+  char *JOBU, char *JOBVT, INT *M, INT *N, double *A, INT *LDA,
+  double *S, double *U, INT *LDU, double *VT, INT *LDVT,
+  double *WORK, INT *LWORK, INT *INFO);
+
 int dgesdd_(
   char *JOBZ, INT *M, INT *N, double *A, INT *LDA,
   double *S, double *U, INT *LDU, double *VT, INT *LDVT,
-  double *WORK, INT *LWORK, INT *IWORK, INT *INFO);
-
-int dgesvd_(char *JOBU, char *JOBVT, INT *M, INT *N, double *A, INT *LDA,
-            double *S, double *U, INT *LDU, double *VT, INT *LDVT,
-            double *WORK, INT *LWORK, INT *INFO)
+  double *WORK, INT *LWORK, INT *IWORK, INT *INFO)
 {
-  printf("call dgesvd ... hand over to dgesdd\n");
+  printf("call dgesdd ... hand over to dgesvd\n");
   
-  INT *IWORK = malloc(8 * (*M) * sizeof(INT));
-
   struct timeval tv0, tv1;
   gettimeofday(&tv0, NULL);
-  /*sdd: JOBZ, M, N, A, LDA, S, U, LDU, VT, LDVT, WORK, LWORK, IWORK, INFO */
-  int ret = dgesdd_(JOBU, M, N, A, LDA, S, U, LDU, VT, LDVT, WORK, LWORK, IWORK, INFO);
+  int ret = dgesvd_(JOBZ, JOBZ, M, N, A, LDA, S, U, LDU, VT, LDVT, WORK, LWORK, INFO);
   gettimeofday(&tv1, NULL);
   
-  free(IWORK);
-
-  printf("done dgesvd (t = %.3f sec)\n", tofday(&tv0, &tv1));
+  printf("done dgesdd (t = %.3f sec)\n", tofday(&tv0, &tv1));
   return ret;
 }
 
