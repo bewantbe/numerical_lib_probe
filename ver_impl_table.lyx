@@ -210,6 +210,8 @@ code
 \begin_inset Text
 
 \begin_layout Plain Layout
+
+\family typewriter
 dgesvd
 \end_layout
 
@@ -228,6 +230,8 @@ n=2500
 \begin_inset Text
 
 \begin_layout Plain Layout
+
+\family typewriter
 dgebrd + dbdsqr
 \end_layout
 
@@ -246,6 +250,8 @@ dgebrd + dbdsqr
 \begin_inset Text
 
 \begin_layout Plain Layout
+
+\family typewriter
 dgebrd + dbdsqr
 \end_layout
 
@@ -339,6 +345,7 @@ same above
 
 \begin_layout Plain Layout
 
+\family typewriter
 \color red
 dgerdb
 \color inherit
@@ -398,6 +405,8 @@ dgerdb
 \begin_inset Text
 
 \begin_layout Plain Layout
+
+\family typewriter
 dgesdd
 \end_layout
 
@@ -416,7 +425,9 @@ n=2500
 \begin_inset Text
 
 \begin_layout Plain Layout
-dgebrd+dbdsdc
+
+\family typewriter
+dgebrd + dbdsdc
 \end_layout
 
 \end_inset
@@ -434,6 +445,8 @@ dgebrd+dbdsdc
 \begin_inset Text
 
 \begin_layout Plain Layout
+
+\family typewriter
 dgebrd + dbdsdc
 \end_layout
 
@@ -443,6 +456,8 @@ dgebrd + dbdsdc
 \begin_inset Text
 
 \begin_layout Plain Layout
+
+\family typewriter
 dgebrd + dbdsdc
 \end_layout
 
@@ -527,6 +542,7 @@ same above
 
 \begin_layout Plain Layout
 
+\family typewriter
 \color red
 dgerdb
 \color inherit
@@ -613,6 +629,8 @@ rank() via
 \begin_inset Text
 
 \begin_layout Plain Layout
+
+\family typewriter
 dgesvd
 \end_layout
 
@@ -649,6 +667,8 @@ dgesvd
 \begin_inset Text
 
 \begin_layout Plain Layout
+
+\family typewriter
 dgesdd
 \end_layout
 
@@ -788,6 +808,8 @@ MatrixRank[] via
 \begin_inset Text
 
 \begin_layout Plain Layout
+
+\family typewriter
 dgesdd
 \end_layout
 
@@ -806,6 +828,8 @@ dgesdd
 \begin_inset Text
 
 \begin_layout Plain Layout
+
+\family typewriter
 dgesdd
 \end_layout
 
@@ -851,6 +875,8 @@ dgesdd
 \begin_inset Text
 
 \begin_layout Plain Layout
+
+\family typewriter
 dgesdd
 \end_layout
 
