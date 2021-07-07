@@ -42,8 +42,8 @@ print("cuda available: ", torch.cuda.is_available());
 #device = torch.device("cpu")
 device = torch.device(device_name)
 
-info_cuda = ('cuda: ' + torch.version.cuda) if device_name!='cpu' else ''
-print('Using device  :', device_name)
+info_cuda = '  ver=' + torch.version.cuda if device_name=='cuda' else ''
+print('Using device  :', device_name, info_cuda)
 print('Data type     :', str_precision)
 
 # Keep CPU or GPU busy, that's it.
